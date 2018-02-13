@@ -14,3 +14,10 @@
     </ul>
   </div>
 </nav>
+<button (click)="getContract()">getcontract</button>
+<div *ngIf="contract">
+  {{contract.amount}}
+</div>
+<div *ngIf="globals.member">
+  {{globals.member.first_name}}
+</div>
