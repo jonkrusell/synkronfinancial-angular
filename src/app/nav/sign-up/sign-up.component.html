@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-login">
+        <h4>Sign Up</h4>
+        <input type="text" [(ngModel)]="firstName" class="form-control input-sm chat-input" placeholder="first name" />
+        <br/>
+        <input type="text" [(ngModel)]="lastName" class="form-control input-sm chat-input" placeholder="last name" />
+        <br/>
+        <input type="text" [(ngModel)]="email" class="form-control input-sm chat-input" placeholder="email" />
+        <br/>
+        <input type="password" [(ngModel)]="password" class="form-control input-sm chat-input" placeholder="password" />
+        <br/>
+        <input type="password" [(ngModel)]="passwordConfirmation" class="form-control input-sm chat-input" placeholder="password confirmation" />
+        <br/>
+        <div class="wrapper">
+        <span class="group-btn">     
+          <button (click)="signUp()" class="btn btn-primary btn-md">sign up<i class="fa fa-sign-in"></i></button>
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

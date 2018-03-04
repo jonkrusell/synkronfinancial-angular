@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   public contract: Contract;
 
-  constructor(private globals: GlobalService, private sharedService: SharedService) { }
+  constructor(public globals: GlobalService, private sharedService: SharedService) { }
 
   ngOnInit() {
   }

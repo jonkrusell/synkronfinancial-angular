@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from '../models/member.model';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
@@ -15,11 +15,21 @@ export class SharedService {
   constructor(private http: HttpClient) { }
 
   authenticateMember(email: string, password: string): Observable<Member> {
-    email = email.trim();
-    password = password.trim();  
     return this.http.get<Member>(this.apiUrl + 'AuthenticateMember/' + email + '/' + password + '/')
       .pipe(
         catchError(this.handleError<Member>(`authenticateMember email=${email}`))
+      );
+  }
+
+  createMember(member: Member) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.post<Member>(this.apiUrl + 'Member/', member, httpOptions)
+      .pipe(
+        catchError(this.handleError<Member>(`createMember`))
       );
   }
 
@@ -32,14 +42,11 @@ export class SharedService {
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
+    return (error: any): Observable<T> => {  
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
+      console.error(error);  
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-  
+      this.log(`${operation} failed: ${error.message}`);  
       // Let the app keep running by returning an empty result.
       return Observable.of(result as T);
     };
